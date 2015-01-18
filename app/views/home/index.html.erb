@@ -1,0 +1,12 @@
+<h1>Hello</h1>
+
+<% if @connected_account %>
+	<%= @connected_account.username %>
+	<%= form_tag instagram_update_path do %>
+		<%= text_field_tag :hashtag, nil, placeholder: 'hashtag' %>
+		<%= hidden_field_tag :account_id, nil, value: @connected_account.id %>
+		<%= submit_tag 'Subscribe' %> 
+	<% end %>
+<% else %>
+	<%= link_to 'Connect', instagram_connect_path %>
+<% end %>
