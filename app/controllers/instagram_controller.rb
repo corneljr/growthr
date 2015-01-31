@@ -1,7 +1,7 @@
 class InstagramController < ApplicationController
 
   def create
-  	redirect_to Instagram.authorize_url(:redirect_uri => 'http://localhost:3000/auth/instagram/callback', :scope => 'likes')
+  	redirect_to Instagram.authorize_url(:redirect_uri => 'https://stormy-stream-5423.herokuapp.com/auth/instagram/callback', :scope => 'likes')
   end
 
   def callback
