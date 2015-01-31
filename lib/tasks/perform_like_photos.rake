@@ -6,7 +6,7 @@ namespace :perform do
 end
 
 def like_photos
-	InstagramAccount.all.each do |account|
+	InstagramAccount.where.not(access_token: nil).each do |account|
 		client = Instagram.client(access_token: account.access_token)
 		ids = client.tag_recent_media(account.hashtag).map(&:id)
 		ids.each do |id|
