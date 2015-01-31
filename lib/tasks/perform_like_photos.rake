@@ -9,7 +9,7 @@ def like_photos
 	InstagramAccount.where.not(access_token: nil).each do |account|
 		client = Instagram.client(access_token: account.access_token)
 		ids = client.tag_recent_media(account.hashtag).map(&:id)
-		ids.each do |id|
+		ids.first(15).each do |id|
 			begin 
 				puts client.like_media(id)
 			rescue Instagram::Error => e
