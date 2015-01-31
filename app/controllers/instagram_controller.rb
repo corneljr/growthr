@@ -5,7 +5,7 @@ class InstagramController < ApplicationController
   end
 
   def callback
-  	response = Instagram.get_access_token(params[:code], :redirect_uri => 'http://localhost:3000/auth/instagram/callback')
+  	response = Instagram.get_access_token(params[:code], :redirect_uri => 'https://stormy-stream-5423.herokuapp.com/auth/instagram/callback')
   	if response.access_token
   		@instagram = InstagramAccount.create(username: response.user.username, access_token: response.access_token)
   	end
