@@ -16,5 +16,6 @@ class InstagramController < ApplicationController
   def update
   	@instagram_account = InstagramAccount.find(params[:account_id])
   	@instagram_account.update(hashtag: params[:hashtag])
+    redirect_to root_path
   end
 end
