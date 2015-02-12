@@ -1,2 +1,5 @@
 instagram_client_id: '73d4864605ee4bc6b5301a01130d47c3'
 instagram_client_secret: '677a68abdb9840469b822420e80e539d'
+
+stripe_secret_key: 'sk_test_BNOrN0rKyB0WgaKLt1Xm0QGD'
+stripe_publishable_key: 'pk_test_mZcdHdT8hkcslsClF7QNko2N'

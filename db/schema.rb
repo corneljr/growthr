@@ -11,15 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116171206) do
+ActiveRecord::Schema.define(version: 20150212021426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_clients", force: true do |t|
+    t.integer  "instagram_client_id"
+    t.integer  "instagram_account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "instagram_accounts", force: true do |t|
     t.string   "username"
     t.string   "access_token"
     t.string   "hashtag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "stripe_token"
+  end
+
+  create_table "instagram_clients", force: true do |t|
+    t.string   "client_id"
+    t.string   "client_secret"
+    t.boolean  "used",          default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

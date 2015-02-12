@@ -2,11 +2,36 @@
 
 <% if @connected_account %>
 	<%= @connected_account.username %>
-	<%= form_tag instagram_update_path do %>
+
+	<p class='payment-errors'></p>
+
+	<%= form_tag instagram_update_path, method: 'POST', id: 'sign-up-form' do %>
+		<%= label_tag :hashtag, "Hashtag" %>
 		<%= text_field_tag :hashtag, nil, placeholder: 'hashtag' %>
+
+		<%= label_tag :card_number, 'Credit Card Number' %>
+		<%= text_field_tag :card_number, nil, name: nil %>
+
+		<%= label_tag :card_code, 'Security Code (CVV)' %>
+		<%= text_field_tag :card_code, nil, name: nil, placeholder: 'Security Code (CVV)' %>
+
+		<%= label_tag :card_month, 'Card Expiration' %>
+		<%= select_month nil, {add_month_numbers: true}, {name: nil, id: 'card_month'} %>
+		<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: 'card_year'} %>
+
 		<%= hidden_field_tag :account_id, nil, value: @connected_account.id %>
+		<%= hidden_field_tag :stripe_card_token, nil, value: @connected_account.id, id: 'stripe_card_token' %>
+		<%= hidden_field_tag :plan_id, nil, value: 1 %>
+		<%= hidden_field_tag :client_id, nil, value: @client_id %>
+
 		<%= submit_tag 'Subscribe' %> 
 	<% end %>
 <% else %>
 	<%= link_to 'Connect', instagram_connect_path %>
 <% end %>
+
+
+<script>
+	Stripe.setPublishableKey("<%= ENV['stripe_publishable_key'] %>");
+	payments.setupForm();
+</script>
