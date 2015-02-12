@@ -20,7 +20,7 @@
 		<%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: 'card_year'} %>
 
 		<%= hidden_field_tag :account_id, nil, value: @connected_account.id %>
-		<%= hidden_field_tag :stripe_card_token, nil, value: @connected_account.id, id: 'stripe_card_token' %>
+		<%= hidden_field_tag :stripe_card_token, nil, id: 'stripe_card_token' %>
 		<%= hidden_field_tag :plan_id, nil, value: 1 %>
 		<%= hidden_field_tag :client_id, nil, value: @client_id %>
 
