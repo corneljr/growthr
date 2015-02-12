@@ -1,7 +1,6 @@
 class InstagramController < ApplicationController
 
   def create
-  	# redirect_to Instagram.authorize_url(:redirect_uri => 'https://stormy-stream-5423.herokuapp.com/auth/instagram/callback', :scope => 'likes')
     @instagram_client = InstagramClient.find_by(used: false)
 
     Instagram.configure do |config|
@@ -10,12 +9,12 @@ class InstagramController < ApplicationController
       config.client_ips = '127.0.0.1'
     end
 
-    redirect_to Instagram.authorize_url(:redirect_uri => 'http://localhost:3000/auth/instagram/callback', :scope => 'likes')
+    redirect_to Instagram.authorize_url(:redirect_uri => ENV['intagram_callback'], :scope => 'likes')
+
   end
 
   def callback
-  	# response = Instagram.get_access_token(params[:code], :redirect_uri => 'https://stormy-stream-5423.herokuapp.com/auth/instagram/callback')
-    response = Instagram.get_access_token(params[:code], :redirect_uri => 'http://localhost:3000/auth/instagram/callback')
+    response = Instagram.get_access_token(params[:code], :redirect_uri => ENV['intagram_callback'])
     
   	if response.access_token
   		@instagram = InstagramAccount.create(username: response.user.username, access_token: response.access_token)
