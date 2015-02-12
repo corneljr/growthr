@@ -9,12 +9,12 @@ class InstagramController < ApplicationController
       config.client_ips = '127.0.0.1'
     end
 
-    redirect_to Instagram.authorize_url(:redirect_uri => ENV['intagram_callback'], :scope => 'likes')
+    redirect_to Instagram.authorize_url(:redirect_uri => ENV['instagram_callback'], :scope => 'likes')
 
   end
 
   def callback
-    response = Instagram.get_access_token(params[:code], :redirect_uri => ENV['intagram_callback'])
+    response = Instagram.get_access_token(params[:code], :redirect_uri => ENV['instagram_callback'])
     
   	if response.access_token
   		@instagram = InstagramAccount.create(username: response.user.username, access_token: response.access_token)
