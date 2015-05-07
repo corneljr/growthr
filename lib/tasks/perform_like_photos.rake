@@ -9,7 +9,7 @@ def like_photos
 	InstagramAccount.where.not(access_token: nil).each do |account|
 		set_client(account)
 		client = Instagram.client(access_token: account.access_token)
-		ids = client.tag_recent_media(account.hashtag).map(&:id)
+		ids = client.tag_recent_media(account.hashtag.split(',').sample).map(&:id)
 		ids.first(15).each do |id|
 			begin 
 				puts "liking for #{account.username} -- #{Instagram.client_id}"
