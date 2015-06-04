@@ -35,7 +35,6 @@ class InstagramController < ApplicationController
     	@instagram_account.update(hashtag: params[:hashtag], stripe_token: customer.id)
 
       AccountClient.create(instagram_account_id: @instagram_account.id, instagram_client_id: @instagram_client.id)
-      @instagram_client.update(used: true)
 
       redirect_to root_path
 
